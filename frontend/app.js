@@ -3,7 +3,7 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
     const nameElement = document.getElementById("name");
     const name = nameElement.value;
     nameElement.value = "";
-    await fetch('http://localhost:3000/add-name', {
+    await fetch('https://idea-collector-api.vercel.app/add-name', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
@@ -11,7 +11,7 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
     loadNames();
 });
 async function loadNames() {
-    const response = await fetch('http://localhost:3000/get-names');
+    const response = await fetch('https://idea-collector-api.vercel.app/get-names');
     if (response.ok) {
         const names = await response.json();
         const nameList = document.getElementById("nameList");
@@ -34,7 +34,7 @@ async function loadNames() {
     }
 }
 async function removeName(name) {
-    const response = await fetch('http://localhost:3000/remove-name', {
+    const response = await fetch('https://idea-collector-api.vercel.app/remove-name', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
