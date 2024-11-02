@@ -10,6 +10,7 @@
         { "src": "/add-name", "dest": "/index.js" },
         { "src": "/get-names", "dest": "/index.js" },
         { "src": "/remove-name", "dest": "/index.js" }
-    ]
+    ],
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }] 
 }
 
