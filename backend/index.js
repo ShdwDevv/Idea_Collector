@@ -12,7 +12,7 @@ app.use(cors({
     credentials: true
 }));
 // MongoDB connection
-const uri = 'mongodb+srv://arshathahamed10:<db_password>@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
+const uri = 'mongodb+srv://arshathahamed10:arshath8220866@@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
