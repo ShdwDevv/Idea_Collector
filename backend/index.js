@@ -11,7 +11,7 @@ app.use(cors()); // You can limit this later by specifying origins
 app.use(bodyParser.json());
 
 // MongoDB connection
-const uri = 'mongodb+srv://arshathahamed10:arshath8220866@@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
+const uri = 'mongodb+srv://arshathahamed10:arshath8220866@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -22,6 +22,9 @@ mongoose.connect(uri, {
 // Import the Name model
 const Name = require("./models/Name");
 
+app.get("/test-cors", (req, res) => {
+    res.json({ message: "CORS is working!" });
+});
 // Endpoint to add a name
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
