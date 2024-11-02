@@ -7,40 +7,25 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "https://idea-collector-front.vercel.app/",
+    origin: "https://idea-collector-front.vercel.app",
     methods: ["POST", "GET"],
     credentials: true
 }));
 
-// Set Content Security Policy
-app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; connect-src 'self' https://idea-collector-api.vercel.app; script-src 'self' https://vercel.live;");
-    next();
-});
-
-// MongoDB connection
 const uri = 'mongodb+srv://arshathahamed10:arshath8220866@@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => {
-    console.log("Connected to MongoDB Atlas");
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server is running and connected to MongoDB Atlas.");
-    });
-})
+.then(() => console.log("Connected to MongoDB Atlas"))
 .catch(err => console.error("Failed to connect to MongoDB Atlas", err));
 
-// Import the Name model
 const Name = require("./models/Name");
 
-// Endpoint to check server status
-app.get("/status", (req, res) => {
-    res.status(200).send({ message: "Server is running and connected to MongoDB." });
+app.get("/test-cors", (req, res) => {
+    res.json({ message: "CORS is working!" });
 });
 
-// Endpoint to add a name
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
@@ -52,13 +37,11 @@ app.post("/add-name", async (req, res) => {
     }
 });
 
-// Endpoint to get all names
 app.get("/get-names", async (req, res) => {
     const names = await Name.find();
-    res.json(names.map(name => name.name)); // Send only the name field
+    res.json(names.map(name => name.name));
 });
 
-// Endpoint to remove a name
 app.post("/remove-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
@@ -73,5 +56,4 @@ app.post("/remove-name", async (req, res) => {
     }
 });
 
-// Export the app for Vercel
 module.exports = app;
