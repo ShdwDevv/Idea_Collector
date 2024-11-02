@@ -11,17 +11,34 @@ app.use(cors({
     methods: ["POST", "GET"],
     credentials: true
 }));
+
+// Set Content Security Policy
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://vercel.live;");
+    next();
+});
+
 // MongoDB connection
 const uri = 'mongodb+srv://arshathahamed10:arshath8220866@@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log("Connected to MongoDB Atlas"))
+.then(() => {
+    console.log("Connected to MongoDB Atlas");
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server is running and connected to MongoDB Atlas.");
+    });
+})
 .catch(err => console.error("Failed to connect to MongoDB Atlas", err));
 
-// Import the Name model (updated path)
+// Import the Name model
 const Name = require("./models/Name");
+
+// Endpoint to check server status
+app.get("/status", (req, res) => {
+    res.status(200).send({ message: "Server is running and connected to MongoDB." });
+});
 
 // Endpoint to add a name
 app.post("/add-name", async (req, res) => {
