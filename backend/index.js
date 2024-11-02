@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "idea-collector-front.vercel.app",
+    origin: "https://idea-collector-front.vercel.app/",
     methods: ["POST", "GET"],
     credentials: true
 }));
