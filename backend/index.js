@@ -35,6 +35,9 @@ mongoose.connect(uri, {
 // Import the Name model
 const Name = require("./models/Name");
 
+app.get("/",(req,res)=>{
+    res.json("Hello");
+})
 // Endpoint to check server status
 app.get("/status", (req, res) => {
     res.status(200).send({ message: "Server is running and connected to MongoDB." });
