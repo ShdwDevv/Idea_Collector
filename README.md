@@ -1,1 +1,1 @@
-# Idea_Collector
+# My First Full Stack App

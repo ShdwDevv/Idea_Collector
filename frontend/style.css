@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+    font-family: "Poppins",Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    background-color: #5680E9;
+    color:#151212;
+}
+.container{
+    width: min(90%,600px);
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #84ceeb;
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+    color:#112d32;
+}
+
+#nameForm {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+}
+#nameForm > button{
+    padding: 10px 40px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #3d5280;
+    color:#fff;
+    font-weight: bold;
+}
+#name{
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+    display: block;
+    font-size: 20px;
+}
+#name:focus {
+    outline: none;
+}
+
+#nameList {
+    list-style-type: none;
+    padding: 0;
+    font-weight: bold;
+    position: relative;
+}
+li {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px; 
+    margin-bottom: 5px;
+}
+
+.remove-button {
+    color: red; 
+    cursor: pointer; 
+    margin-left: 10px; 
+}
+
+#nameList > li{
+    width: 200px;
+    margin-bottom: 10px;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+span{
+    color:#fff;
+    border-radius: 50%;
+    background-color: red;
+    font-size: 10px;
+    padding:1px 5px;
+    cursor: pointer;
+}
