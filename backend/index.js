@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: ["https://deploy-mern"],
+    origin: ["https://idea-collector-front.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
