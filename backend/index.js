@@ -14,7 +14,7 @@ app.use(cors({
 
 // Set Content Security Policy
 app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://vercel.live;");
+    res.setHeader("Content-Security-Policy", "default-src 'self'; connect-src 'self' https://idea-collector-api.vercel.app; script-src 'self' https://vercel.live;");
     next();
 });
 
@@ -35,9 +35,6 @@ mongoose.connect(uri, {
 // Import the Name model
 const Name = require("./models/Name");
 
-app.get("/",(req,res)=>{
-    res.json("Hello");
-})
 // Endpoint to check server status
 app.get("/status", (req, res) => {
     res.status(200).send({ message: "Server is running and connected to MongoDB." });
