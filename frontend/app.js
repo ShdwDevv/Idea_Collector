@@ -30,9 +30,8 @@ async function loadNames() {
     try {
         const response = await fetch('https://idea-collector-api.vercel.app/get-names');
         if (!response.ok) {
-            throw new Error("Failed to load names");
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        
         const names = await response.json();
         const nameList = document.getElementById("nameList");
         nameList.innerHTML = "";
@@ -42,8 +41,8 @@ async function loadNames() {
             const removeButton = document.createElement("span");
             removeButton.textContent = "X";
             removeButton.onclick = async () => {
-                await removeName(name);
-                listItem.remove();
+                await removeName(name); 
+                listItem.remove(); 
                 loadNames();
             };
             listItem.appendChild(removeButton);
@@ -51,7 +50,6 @@ async function loadNames() {
         });
     } catch (error) {
         console.error("Error loading names:", error);
-        alert("Error loading names. Please try again.");
     }
 }
 

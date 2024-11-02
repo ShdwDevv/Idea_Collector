@@ -5,13 +5,12 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(cors({
-    origin: "https://idea-collector-front.vercel.app",
-    methods: ["POST", "GET"],
-    credentials: true
-}));
+// Enable CORS for all origins (for debugging purposes)
+app.use(cors()); // You can limit this later by specifying origins
 
+app.use(bodyParser.json());
+
+// MongoDB connection
 const uri = 'mongodb+srv://arshathahamed10:arshath8220866@@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
     useNewUrlParser: true,
@@ -20,12 +19,10 @@ mongoose.connect(uri, {
 .then(() => console.log("Connected to MongoDB Atlas"))
 .catch(err => console.error("Failed to connect to MongoDB Atlas", err));
 
+// Import the Name model
 const Name = require("./models/Name");
 
-app.get("/test-cors", (req, res) => {
-    res.json({ message: "CORS is working!" });
-});
-
+// Endpoint to add a name
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
@@ -37,11 +34,13 @@ app.post("/add-name", async (req, res) => {
     }
 });
 
+// Endpoint to get all names
 app.get("/get-names", async (req, res) => {
     const names = await Name.find();
-    res.json(names.map(name => name.name));
+    res.json(names.map(name => name.name)); // Send only the name field
 });
 
+// Endpoint to remove a name
 app.post("/remove-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
@@ -56,4 +55,5 @@ app.post("/remove-name", async (req, res) => {
     }
 });
 
+// Export the app for Vercel
 module.exports = app;
