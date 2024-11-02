@@ -28,7 +28,7 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
 
 async function loadNames() {
     try {
-        const response = await fetch('https://idea-collector-api.vercel.app/get-names');
+        const response = await fetch('https://idea-collector-api.vercel.app/get-names/');
         if (!response.ok) {
             throw new Error("Failed to load names");
         }
