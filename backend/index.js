@@ -7,11 +7,10 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "https://idea-collector-front.vercel.app",
+    origin: "https://idea-collector-front.vercel.app/",
     methods: ["POST", "GET"],
     credentials: true
 }));
-
 // MongoDB connection
 const uri = 'mongodb+srv://arshathahamed10:<db_password>@cluster0.zcmzg.mongodb.net/namesDB?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(uri, {
