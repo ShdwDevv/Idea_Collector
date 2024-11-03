@@ -9,7 +9,6 @@ const { db } = require("./firebase"); // Import the db instance from firebase.js
 
 const app = express();
 
-// Middleware
 app.use(bodyParser.json());
 const corsOptions = {
     origin: process.env.CORS_ORIGIN,
