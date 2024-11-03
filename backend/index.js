@@ -8,10 +8,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN, // Use the environment variable for CORS origin
-    methods: ["GET", "POST"], // Specify the allowed methods
-    credentials: true, // Allow credentials if needed
+    origin: process.env.CORS_ORIGIN, // Set this in your .env file
+    methods: ["GET", "POST"], // Specify the methods you want to allow
+    credentials: true, // If you need to send cookies or authorization headers
 };
+app.use(cors(corsOptions)); // Enable CORS with options
+
 // app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
 mongoose.connect(process.env.MONGODB_URI);
 console.log(process.env.MONGODB_URI);
