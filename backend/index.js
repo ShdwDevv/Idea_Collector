@@ -5,7 +5,8 @@ const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-mongoose.connect("mongodb://localhost:27017/namesDB", {
+app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

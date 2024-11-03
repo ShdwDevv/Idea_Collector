@@ -3,15 +3,16 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
     const nameElement = document.getElementById("name");
     const name = nameElement.value;
     nameElement.value = "";
-    await fetch('http://localhost:3000/add-name', {
+    await fetch(`${import.meta.env.VITE_API_BASE_URL}/add-name`, { // <-- Use environment variable here
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
     });
     loadNames();
 });
+
 async function loadNames() {
-    const response = await fetch('http://localhost:3000/get-names');
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/get-names`); // <-- Use environment variable here
     if (response.ok) {
         const names = await response.json();
         const nameList = document.getElementById("nameList");
@@ -25,7 +26,6 @@ async function loadNames() {
             removeButton.style.cursor = "pointer"; 
             removeButton.style.marginLeft = "10px"; 
             removeButton.onclick = async () => {
-
                 await removeName(name); 
                 loadNames(); 
             };
@@ -36,8 +36,9 @@ async function loadNames() {
         console.error("Failed to load names");
     }
 }
+
 async function removeName(name) {
-    const response = await fetch('http://localhost:3000/remove-name', {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/remove-name`, { // <-- Use environment variable here
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
@@ -48,4 +49,5 @@ async function removeName(name) {
         console.error("Failed to remove name");
     }
 }
+
 loadNames();
