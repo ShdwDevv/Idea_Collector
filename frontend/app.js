@@ -13,7 +13,10 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
 });
 
 async function loadNames() {
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/get-names`); // <-- Use environment variable here
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/get-names`,{
+        mode: 'no-cors',
+        method: 'GET',
+    }); // <-- Use environment variable here
     if (response.ok) {
         const names = await response.json();
         const nameList = document.getElementById("nameList");
