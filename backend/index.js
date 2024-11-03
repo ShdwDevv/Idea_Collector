@@ -18,7 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Add name to Realtime Database
-app.post("/add-name", async (req, res) => {
+app.post("add-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
         try {
@@ -34,7 +34,7 @@ app.post("/add-name", async (req, res) => {
 });
 
 // Get all names from Realtime Database
-app.get("/get-names", async (req, res) => {
+app.get("get-names", async (req, res) => {
     try {
         const snapshot = await db.ref("names").once("value"); // Get all names
         const names = [];
@@ -48,7 +48,7 @@ app.get("/get-names", async (req, res) => {
 });
 
 // Remove name from Realtime Database
-app.post("/remove-name", async (req, res) => {
+app.post("remove-name", async (req, res) => {
     const { name } = req.body;
     if (name) {
         try {
