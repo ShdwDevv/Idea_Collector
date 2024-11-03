@@ -37,11 +37,11 @@ h1, h2 {
     font-weight: bold;
 }
 #name{
-    padding: 10px 25px;
+    padding: 10px 20px;
     border-radius: 20px;
     border: none;
     display: block;
-    font-size: 20px;
+    font-size: 15px;
 }
 #name:focus {
     outline: none;

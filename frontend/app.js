@@ -1,74 +1,51 @@
 document.getElementById("nameForm").addEventListener("submit", async function (event) {
     event.preventDefault();
     const nameElement = document.getElementById("name");
-    const name = nameElement.value.trim();
-    if (!name) {
-        alert("Please enter a name.");
-        return;
-    }
-
-    try {
-        const response = await fetch('https://idea-collector-api.vercel.app/add-name', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name })
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to add name");
-        }
-
-        nameElement.value = "";
-        await loadNames();
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Error adding name. Please try again.");
-    }
+    const name = nameElement.value;
+    nameElement.value = "";
+    await fetch('http://localhost:3000/add-name', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name })
+    });
+    loadNames();
 });
-
 async function loadNames() {
-    try {
-        const response = await fetch('https://idea-collector-api.vercel.app/get-names');
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    const response = await fetch('http://localhost:3000/get-names');
+    if (response.ok) {
         const names = await response.json();
         const nameList = document.getElementById("nameList");
         nameList.innerHTML = "";
+
         names.forEach((name, index) => {
             const listItem = document.createElement("li");
             listItem.textContent = `${index + 1}. ${name} `;
             const removeButton = document.createElement("span");
             removeButton.textContent = "X";
+            removeButton.style.cursor = "pointer"; 
+            removeButton.style.marginLeft = "10px"; 
             removeButton.onclick = async () => {
+
                 await removeName(name); 
-                listItem.remove(); 
-                loadNames();
+                loadNames(); 
             };
             listItem.appendChild(removeButton);
             nameList.appendChild(listItem);
         });
-    } catch (error) {
-        console.error("Error loading names:", error);
+    } else {
+        console.error("Failed to load names");
     }
 }
-
 async function removeName(name) {
-    try {
-        const response = await fetch('https://idea-collector-api.vercel.app/remove-name', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name })
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to remove name");
-        }
+    const response = await fetch('http://localhost:3000/remove-name', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name })
+    });
+    if (response.ok) {
         console.log("Name removed successfully");
-    } catch (error) {
-        console.error("Error removing name:", error);
-        alert("Error removing name. Please try again.");
+    } else {
+        console.error("Failed to remove name");
     }
 }
-
 loadNames();
