@@ -7,6 +7,11 @@ const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN, // Use the environment variable for CORS origin
+    methods: ["GET", "POST"], // Specify the allowed methods
+    credentials: true, // Allow credentials if needed
+};
 // app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
 mongoose.connect(process.env.MONGODB_URI);
 console.log(process.env.MONGODB_URI);
