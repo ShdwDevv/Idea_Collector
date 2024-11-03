@@ -11,7 +11,7 @@ const app = express();
 
 app.use(bodyParser.json());
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
+    origin: 'https://idea-collector-front.vercel.app',
     methods: ["GET", "POST"],
     credentials: true,
 };
