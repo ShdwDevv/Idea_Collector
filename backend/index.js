@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -5,11 +7,9 @@ const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+// app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT} PORT`));
+mongoose.connect(process.env.MONGODB_URI);
+console.log(process.env.MONGODB_URI);
 const Name = require("./models/Name");
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
