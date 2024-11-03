@@ -4,6 +4,7 @@ document.getElementById("nameForm").addEventListener("submit", async function (e
     const name = nameElement.value;
     nameElement.value = "";
     await fetch(`${import.meta.env.VITE_API_BASE_URL}/add-name`, { // <-- Use environment variable here
+        mode: 'no-cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
@@ -39,6 +40,7 @@ async function loadNames() {
 
 async function removeName(name) {
     const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/remove-name`, { // <-- Use environment variable here
+        mode: 'no-cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name })
