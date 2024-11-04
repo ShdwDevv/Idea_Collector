@@ -5,7 +5,7 @@ dotenv.config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { db } = require("./firebase"); // Import the db instance from firebase.js
+const { db } = require("./firebase.js"); // Import the db instance from firebase.js
 
 const app = express();
 
