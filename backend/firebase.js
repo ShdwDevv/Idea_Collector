@@ -1,5 +1,5 @@
 // firebase.js
-const admin = require("firebase");
+const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccount.json"); // Replace with the path to your service account key
 
 // Initialize Firebase Admin SDK
