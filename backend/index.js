@@ -16,15 +16,12 @@ const headers = {'Content-Type':'application/json',
 //     body: JSON.stringify(X),
 // };
 // return response;
-const corsOptions = {
-    origin: '*',
-    methods: ["GET", "POST"],
-    credentials: true,
-    optionSuccessStatus:200,
-
-};
-app.use(cors(corsOptions));
-console.log(corsOptions.origin)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://idea-collector-fl7d-g0e5hqs5x-arshath-ahamed-as-projects.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
 // Add name to Realtime Database
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
