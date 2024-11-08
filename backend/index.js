@@ -1,31 +1,26 @@
 const dotenv = require("dotenv");
-dotenv.config({path:"./.env"});
+dotenv.config({ path: "./.env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { db } = require("./firebase"); // Import the db instance from firebase.js
 const app = express();
+
 // Middleware
 app.use(bodyParser.json());
-const headers = {'Content-Type':'application/json',
-                    'Access-Control-Allow-Origin':'*',
-                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
-// const response = {
-//     statusCode: 200,
-//     headers:headers,
-//     body: JSON.stringify(X),
-// };
-// return response;
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://idea-collector-fl7d-g0e5hqs5x-arshath-ahamed-as-projects.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
-});
+
+// CORS configuration
+const corsOptions = {
+    origin: "https://idea-collector-fl7d-g0e5hqs5x-arshath-ahamed-as-projects.vercel.app",
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+};
+app.use(cors(corsOptions)); // Use cors middleware
+
 // Add name to Realtime Database
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
-    res.set(headers); // Set headers for this response
     if (name) {
         try {
             const newNameRef = db.ref("names").push();
@@ -39,8 +34,8 @@ app.post("/add-name", async (req, res) => {
     }
 });
 
+// Get all names from Realtime Database
 app.get("/get-names", async (req, res) => {
-    res.set(headers); // Set headers for this response
     try {
         const snapshot = await db.ref("names").once("value");
         const names = [];
@@ -53,9 +48,9 @@ app.get("/get-names", async (req, res) => {
     }
 });
 
+// Remove name from Realtime Database
 app.post("/remove-name", async (req, res) => {
     const { name } = req.body;
-    res.set(headers); // Set headers for this response
     if (name) {
         try {
             const snapshot = await db.ref("names").once("value");
@@ -77,4 +72,9 @@ app.post("/remove-name", async (req, res) => {
     } else {
         res.status(400).json({ error: "Name is required" });
     }
+});
+
+// Start the server
+app.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
 });
