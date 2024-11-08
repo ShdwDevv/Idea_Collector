@@ -8,9 +8,11 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
+    origin: '*',
     methods: ["GET", "POST"],
     credentials: true,
+    optionSuccessStatus:200,
+
 };
 app.use(cors(corsOptions));
 console.log(corsOptions.origin)
