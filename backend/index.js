@@ -16,15 +16,15 @@ const headers = {'Content-Type':'application/json',
 //     body: JSON.stringify(X),
 // };
 // return response;
-// const corsOptions = {
-//     origin: '*',
-//     methods: ["GET", "POST"],
-//     credentials: true,
-//     optionSuccessStatus:200,
+const corsOptions = {
+    origin: '*',
+    methods: ["GET", "POST"],
+    credentials: true,
+    optionSuccessStatus:200,
 
-// };
-// app.use(cors(corsOptions));
-// console.log(corsOptions.origin)
+};
+app.use(cors(corsOptions));
+console.log(corsOptions.origin)
 // Add name to Realtime Database
 app.post("/add-name", async (req, res) => {
     const { name } = req.body;
