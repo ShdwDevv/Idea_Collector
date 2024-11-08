@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // CORS configuration
 const corsOptions = {
-    origin: "https://idea-collector-fl7d-g0e5hqs5x-arshath-ahamed-as-projects.vercel.app",
+    origin: "*",
     methods: ["GET", "POST", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
